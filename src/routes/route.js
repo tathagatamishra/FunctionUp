@@ -2,42 +2,104 @@ const express = require('express');
 const abc = require('../introduction/intro')
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    console.log('My batch is', abc.name)
-    abc.printName()
-    res.send('My second ever api!')
-});
 
-router.get('/students', function (req, res){
-    console.log("The path params in the request are : ", req.params)
-    let students = ['Sabiha', 'Neha', 'Akash']
-    res.send(students)
+// 1. --------------------------------------------
+
+router.get('/movies', function (request, response) {
+
+    let myMovies = request.params
+
+    console.log("My movies : ", myMovies);
+
+    let movieArr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+
+    response.send(movieArr)
 })
 
+// 2. --------------------------------------------
 
-// Example 1 for path params
-router.get('/students/:studentName', function(req, res){
-    // ':' denotes that the following part of route is a variable
-    // The value of this variable is what we are sending in the request url after /students
-    // This value is set in the form of an object inside req.params
-    // The object contain key value pairs
-    // key is the variable in the route
-    // value is whatever dynamic value sent in the request url
-    let myParams = req.params
+router.get('/movies/:num', function (request, response) {
 
-    // params attribute is fixed in a request object
-    // params contains the path parameters object
-    console.log("The path params in the request are : ", myParams)
-    res.send('The full name is ' + myParams.studentName )
+    let yourMovie = request.params.num
+
+    console.log("your movie ", yourMovie);
+
+    let movieArr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+
+    response.send(movieArr[yourMovie-1])
 })
 
-// Example 2 for path params
-router.get('/student-details/:name', function(req, res){
-    let requestParams = req.params
-    console.log("This is the request ", requestParams)
-    let studentName = requestParams.name
-    console.log('Name of the student is ', studentName)
-    res.send('Dummy response')
+// 3. --------------------------------------------
+
+router.get('/movies/:num', function (request, response) {
+
+    let yourMovie = request.params.num
+
+    let movieArr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+
+    if (yourMovie < 4) {
+        response.send(movieArr[yourMovie])
+    }
+    else {
+        response.send("Error : Enter a valid number between (0 to 3)")
+    }
 })
+
+// 4. --------------------------------------------
+
+router.get('/films', function (request, response) {
+
+    let myFilms = request.params
+
+    console.log("My movies : ", myFilms)
+
+    let movieArr = [{
+        "id": 1,
+        "name": "The Shining"
+    }, {
+        "id": 2,
+        "name": "Incendies"
+    }, {
+        "id": 3,
+        "name": "Rang de Basanti"
+    }, {
+        "id": 4,
+        "name": "Finding Nemo"
+    }]
+
+    response.send(movieArr)
+})
+
+// 5. --------------------------------------------
+
+router.get('/films/:filmId', function (request, response) {
+
+    let myFilms = request.params.filmId
+
+    console.log("My movies : ", myFilms)
+
+    let movieArr = [{
+        "id": 1,
+        "name": "The Shining"
+    }, {
+        "id": 2,
+        "name": "Incendies"
+    }, {
+        "id": 3,
+        "name": "Rang de Basanti"
+    }, {
+        "id": 4,
+        "name": "Finding Nemo"
+    }]
+
+    if (myFilms < 5) {
+        response.send(movieArr[myFilms-1])
+    }
+    else {
+        response.send("Enter a valid number between (0 to 3)")
+    }
+
+})
+
 
 module.exports = router;
