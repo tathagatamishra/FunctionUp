@@ -1,19 +1,32 @@
-const express = require('express');
-const router = express.Router();
-// const UserModel= require("../models/userModel.js")
-const UserController= require("../controllers/userController")
-const BookController= require("../controllers/bookController")
+const express = require('express')
+const router = express.Router()
+const bookModel = require("../models/bookModel")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
+
+const bookController = require("../controllers/bookController")
+
+router.get("/bookstore", function (req, res) {
+    res.send("BOOK STORE IS OPEN !")
 })
 
-router.post("/createUser", UserController.createUser  )
 
-router.get("/getUsersData", UserController.getUsersData)
+router.post("/bookstore/createBook", bookController.createBook)
 
-router.post("/createBook", BookController.createBook  )
+router.get("/bookstore/bookList", bookController.bookList)
 
-router.get("/getBooksData", BookController.getBooksData)
+router.post("/bookstore/:publishYear", async function (req, res) {
 
-module.exports = router;
+    let queryYear = req.params.publishYear
+    let bookByYear = await bookModel.find( { year: queryYear } )
+    res.send({ msg: bookByYear })
+})
+
+router.post("/bookstore/getParticularBooks", function (req, res) {
+
+    let x = req.body
+    // let theBook = await bookModel.find( {bookName: deepSearch} )
+    console.log(x);
+    res.send("deepSearch")
+})
+
+module.exports = router
