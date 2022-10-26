@@ -15,6 +15,10 @@ router.get("/bookstore/bookList", bookController.bookList)
 
 router.post("/bookstore/:publishYear", bookController.getBookByYear)
 
-router.post("/bookstore/specificBook", bookController.getParticularBook)
+router.get("/bookstore/specificBook", bookController.getParticularBook)
+
+router.get("/bookstore/searchByPrice", bookController.getXINRBooks)
+
+router.get("/bookstore/randomBook", bookController.getRandomBooks)
 
 module.exports = router
