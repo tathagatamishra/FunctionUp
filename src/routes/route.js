@@ -16,7 +16,7 @@ router.post("/3rdBookStore/addAuthor", bookController.createAuthor)
 
 router.post("/3rdBookStore/addBook", bookController.createBook)
 
-router.get("/3rdBookStore/book+author", bookController.bookNauthorData)
+router.get("/3rdBookStore/bookAuthor", bookController.bookNauthorData)
 
 router.get("/3rdBookStore/updateData", bookController.updateData)
 

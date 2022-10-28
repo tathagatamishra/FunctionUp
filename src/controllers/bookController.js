@@ -26,9 +26,8 @@ const bookNauthorData = async function (req, res) {
 const updateData = async function (req, res) {
     let allUsers = await BookModel.bookSchema.findOne({ name: { $eq: "Two states" } })
     let id = allUsers.author_id
-    // let authorData = await BookModel.authorSchema.find({ author_id: { $eq: id } })
     let authorName = await BookModel.authorSchema.find({ author_id: { $eq: id } }).select({ author_name: 1, _id: 0 })
-    let price = await BookModel.bookSchema.findOneAndUpdate({ name: { $eq: "Two states" } }, { $set: { price: 999 } }, { new: true }).select({ price: 1, _id: 0 })
+    let price = await BookModel.bookSchema.findOneAndUpdate({ name: { $eq: "Two states" } }, { $set: { price: 100 } }, { new: true }).select({ price: 1, _id: 0 })
 
     res.send({ msg: authorName, price })
 }
