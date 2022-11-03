@@ -11,13 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose.connect("mongodb+srv://new_user:jk1BBWwmxQpZ31zO@cluster0.pxvwsjp.mongodb.net/Authentication", {
     useNewUrlParser: true
 })
-.then( () => console.log("MongoDb is connected"))
+.then( () => console.log("MongoDb is ✅✅✅"))
 .catch ( err => console.log(err) )
 
 
 app.use('/', route)
 
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log('Express app running on port ' + (process.env.PORT || 3000))
+app.listen(1000, function () {
+    console.log('Express app 🏃🏃🏃 on port 3️⃣ 0️⃣ 0️⃣ 0️⃣')
 });
