@@ -10,7 +10,7 @@ router.get("/servertest", function (req, res) {
 })
 
 
-router.post("/user", userController.createUser)
+router.post("/createuser", userController.createUser)
 
 router.post("/login", userController.loginUser)
 
