@@ -1,4 +1,4 @@
-# TOPIC: Authorization
+# TOPIC: TRY CATCH
 
 ## Authorization with JWT
 - Token comparison with the userId requested
