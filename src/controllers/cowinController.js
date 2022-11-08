@@ -1,17 +1,19 @@
-let axios = require("axios")
+let axios = require('axios')
 
+//--------------------------------------------
+// get all states of India
 
 let getStates = async function (req, res) {
 
     try {
-        let options = {
+        let api = {
             method: 'get',
             url: 'https://cdn-api.co-vin.in/api/v2/admin/location/states'
         }
-        let result = await axios(options);
-        console.log(result)
-        let data = result.data
-        res.status(200).send({ msg: data, status: true })
+        let response = await axios(api);
+        console.log(response)
+        let theData = response.data
+        res.status(200).send({ data: theData, status: true })
     }
     catch (err) {
         console.log(err)
@@ -19,37 +21,44 @@ let getStates = async function (req, res) {
     }
 }
 
+//--------------------------------------------
+// get all districts of state by id
 
 let getDistricts = async function (req, res) {
     try {
         let id = req.params.stateId
-        let options = {
+        let api = {
             method: "get",
             url: `https://cdn-api.co-vin.in/api/v2/admin/location/districts/${id}`
         }
-        let result = await axios(options);
-        console.log(result)
-        let data = result.data
-        res.status(200).send({ msg: data, status: true })
+        let response = await axios(api);
+        console.log(response)
+        let theData = response.data
+        res.status(200).send({ data: theData, status: true })
     }
     catch (err) {
         console.log(err)
         res.status(500).send({ msg: err.message })
     }
 }
+
+//--------------------------------------------
+// get by pin of location
 
 let getByPin = async function (req, res) {
     try {
         let pin = req.query.pincode
         let date = req.query.date
+
         console.log(`query params are: ${pin} ${date}`)
-        var options = {
+
+        let api = {
             method: "get",
             url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=${pin}&date=${date}`
         }
-        let result = await axios(options)
-        console.log(result.data)
-        res.status(200).send({ msg: result.data })
+        let response = await axios(api)
+        console.log(response.data)
+        res.status(200).send({ msg: response.data })
     }
     catch (err) {
         console.log(err)
@@ -57,20 +66,23 @@ let getByPin = async function (req, res) {
     }
 }
 
+//--------------------------------------------
+// get otp in mobile number
+
 let getOtp = async function (req, res) {
     try {
-        let blahhh = req.body
-        
-        console.log(`body is : ${blahhh} `)
-        var options = {
+        let phone = req.body
+
+        console.log(`body is : ${phone} `)
+
+        let api = {
             method: "post",
             url: `https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP`,
-            data: blahhh
+            data: phone
         }
-
-        let result = await axios(options)
-        console.log(result.data)
-        res.status(200).send({ msg: result.data })
+        let response = await axios(api)
+        console.log(response.data)
+        res.status(200).send({ msg: response.data })
     }
     catch (err) {
         console.log(err)
